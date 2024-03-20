@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
     public static class ClassViewHolder extends RecyclerView.ViewHolder{
-
+    TextView className;
+    TextView subjectName;
 
         public ClassViewHolder(@NonNull View itemView) {
             super(itemView);
