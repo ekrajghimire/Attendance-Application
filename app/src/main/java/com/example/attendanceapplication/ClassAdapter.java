@@ -1,5 +1,6 @@
 package com.example.attendanceapplication;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
+    ArrayList<ClassItem> classItems;
+    Context context;
+    public ClassAdapter(Context context, ArrayList<ClassItem> classItems) {
+        this.classItems = classItems;
+        this.context = context;
+    }
+
     public static class ClassViewHolder extends RecyclerView.ViewHolder{
     TextView className;
     TextView subjectName;
 
         public ClassViewHolder(@NonNull View itemView) {
             super(itemView);
+            className = itemView.findViewById(R.id.class_tv);
+            subjectName = itemView.findViewById(R.id.subject_tv);
         }
     }
 
@@ -27,11 +39,12 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
-
+    holder.className.setText(classItems.get(position).getClassName());
+    holder.subjectName.setText(classItems.get(position).getSubjectName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return classItems.size();
     }
 }
