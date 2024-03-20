@@ -2,12 +2,15 @@ package com.example.attendanceapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -19,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
     ClassAdapter classAdapter;
     RecyclerView.LayoutManager LayoutManager;
     ArrayList<ClassItem> classItems = new ArrayList<>();
-    
+
+    EditText class_edt;
+    EditText subject_edt;
+    private LinearLayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +34,44 @@ public class MainActivity extends AppCompatActivity {
         
         fab = findViewById(R.id.fab_main);
         fab.setOnClickListener(v -> showDialog());
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        classAdapter = new ClassAdapter(this, classItems);
+        recyclerView.setAdapter(classAdapter);
+
     }
 
     private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.class_diaglog, null);
         builder.setView(view);
+        AlertDialog dialog =  builder.create();
+        dialog.show();
 
-        builder.create().show();
+        class_edt = view.findViewById(R.id.class_edt);
+        subject_edt = view.findViewById(R.id.subject_edt);
+
+        Button cancel = view.findViewById(R.id.cancel_btn);
+        Button add = view.findViewById(R.id.add_btn);
+
+        cancel.setOnClickListener(v -> dialog.dismiss());
+        add.setOnClickListener(v -> {
+            addClass();
+            dialog.dismiss();
+        });
+
+
+
+    }
+
+    private void addClass() {
+        String className = class_edt.getText().toString();
+        String subjectName = subject_edt.getText().toString();
+        classItems.add(new ClassItem(className, subjectName));
+        classAdapter.notifyDataSetChanged();
     }
 }
