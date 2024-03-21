@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.class_diaglog, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog, null);
         builder.setView(view);
         AlertDialog dialog =  builder.create();
         dialog.show();
