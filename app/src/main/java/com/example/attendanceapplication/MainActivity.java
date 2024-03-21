@@ -1,7 +1,6 @@
 package com.example.attendanceapplication;
 
 import android.os.Bundle;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager LayoutManager;
     ArrayList<ClassItem> classItems = new ArrayList<>();
 
-    EditText class_edt;
-    EditText subject_edt;
     private LinearLayoutManager layoutManager;
 
     @Override
