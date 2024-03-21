@@ -1,15 +1,11 @@
 package com.example.attendanceapplication;
 
-import androidx.appcompat.app.AlertDialog;
+import android.os.Bundle;
+import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -45,31 +41,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog, null);
-        builder.setView(view);
-        AlertDialog dialog =  builder.create();
-        dialog.show();
-
-        class_edt = view.findViewById(R.id.class_edt);
-        subject_edt = view.findViewById(R.id.subject_edt);
-
-        Button cancel = view.findViewById(R.id.cancel_btn);
-        Button add = view.findViewById(R.id.add_btn);
-
-        cancel.setOnClickListener(v -> dialog.dismiss());
-        add.setOnClickListener(v -> {
-            addClass();
-            dialog.dismiss();
-        });
-
+    MyDialog dialog = new MyDialog();
+    dialog.show(getSupportFragmentManager(), MyDialog.CLASS_ADD_DIALOG);
+    dialog.setListener((className, subjectName) -> addClass(className, subjectName));
 
 
     }
 
-    private void addClass() {
-        String className = class_edt.getText().toString();
-        String subjectName = subject_edt.getText().toString();
+    private void addClass(String className, String subjectName) {
         classItems.add(new ClassItem(className, subjectName));
         classAdapter.notifyDataSetChanged();
     }
