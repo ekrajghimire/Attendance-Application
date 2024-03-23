@@ -1,5 +1,6 @@
 package com.example.attendanceapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         classAdapter = new ClassAdapter(this, classItems);
         recyclerView.setAdapter(classAdapter);
+        classAdapter.setOnItemClickListener(position -> gotoItemActivity(position));
 
+    }
+
+    private void gotoItemActivity(int position) {
+        Intent intent = new Intent(this, StudentActivity.class);
+
+        intent.putExtra("className",classItems.get(position).getClassName());
+        intent.putExtra("subjectName",classItems.get(position).getClassName());
+        intent.putExtra("position", position);
+        startActivity(intent);
     }
 
     private void showDialog(){
