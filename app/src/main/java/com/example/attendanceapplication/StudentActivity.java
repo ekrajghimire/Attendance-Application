@@ -34,6 +34,6 @@ public class StudentActivity extends AppCompatActivity {
         title.setText(className);
         subtitle.setText(subjectName);
 
-
+        back.setOnClickListener(v -> onBackPressed());
     }
 }
