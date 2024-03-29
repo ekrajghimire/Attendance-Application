@@ -44,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(classAdapter);
         classAdapter.setOnItemClickListener(position -> gotoItemActivity(position));
 
+        setToolbar();
+    }
 
+    private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
         TextView title = toolbar.findViewById(R.id.title_toolbar);
         TextView subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
@@ -52,17 +55,16 @@ public class MainActivity extends AppCompatActivity {
         ImageButton save = toolbar.findViewById(R.id.save);
 
         title.setText("Attendance App");
-        subtitle.setVisibility(View.VISIBLE);
+        subtitle.setVisibility(View.GONE);
         back.setVisibility(View.VISIBLE);
         save.setVisibility(View.VISIBLE);
-
     }
 
     private void gotoItemActivity(int position) {
         Intent intent = new Intent(this, StudentActivity.class);
 
         intent.putExtra("className",classItems.get(position).getClassName());
-        intent.putExtra("subjectName",classItems.get(position).getClassName());
+        intent.putExtra("subjectName",classItems.get(position).getClasName());
         intent.putExtra("position", position);
         startActivity(intent);
     }
