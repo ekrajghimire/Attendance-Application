@@ -2,8 +2,12 @@ package com.example.attendanceapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,12 +15,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     RecyclerView recyclerView;
     ClassAdapter classAdapter;
     RecyclerView.LayoutManager LayoutManager;
     ArrayList<ClassItem> classItems = new ArrayList<>();
+    Toolbar toolbar;
+
 
     private LinearLayoutManager layoutManager;
 
@@ -36,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
         classAdapter = new ClassAdapter(this, classItems);
         recyclerView.setAdapter(classAdapter);
         classAdapter.setOnItemClickListener(position -> gotoItemActivity(position));
+
+
+        toolbar = findViewById(R.id.toolbar);
+        TextView title = toolbar.findViewById(R.id.title_toolbar);
+        TextView subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
+        ImageButton back = toolbar.findViewById(R.id.back);
+        ImageButton save = toolbar.findViewById(R.id.save);
+
+        title.setText("Attendance App");
+        subtitle.setVisibility(View.VISIBLE);
+        back.setVisibility(View.VISIBLE);
+        save.setVisibility(View.VISIBLE);
 
     }
 
