@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, StudentActivity.class);
 
         intent.putExtra("className",classItems.get(position).getClassName());
-        intent.putExtra("subjectName",classItems.get(position).getClasName());
+        intent.putExtra("subjectName",classItems.get(position).getSubjectName());
         intent.putExtra("position", position);
         startActivity(intent);
     }
